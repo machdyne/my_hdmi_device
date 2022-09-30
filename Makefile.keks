@@ -24,7 +24,7 @@ all: $(PROJ).rpt $(PROJ).bin
 	icetime -d $(DEVICE) -mtr $@ $<
 
 prog: $(PROJ).bin
-	icoprog -p < $<
+	ldprog -k -s $<
 
 clean:
 	rm -f $(PROJ).blif $(PROJ).asc $(PROJ).rpt $(PROJ).bin $(PROJ).json

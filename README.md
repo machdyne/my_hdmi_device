@@ -44,6 +44,9 @@ tangnano4k:
 `define NANO_4K \
 open prj file nano4k/my_hdmi_nano/my_hdmi_nano.gprj \
 
+keks:
+make -f Makefile.keks prog
+
 Have fun!
 
 Hirosh
