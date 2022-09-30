@@ -1,0 +1,27 @@
+set_io clk_100mhz	F7
+
+set_io hdmi_p[0]	T8
+set_io hdmi_p[1]	T10
+set_io hdmi_p[2]  T14
+set_io hdmi_p[3]	T6
+
+set_io hdmi_n[0]	T7
+set_io hdmi_n[1]	T9
+set_io hdmi_n[2]  T13
+set_io hdmi_n[3]	T5
+
+# PMOD A
+set_io led[0]		A11
+set_io led[1]		B13
+set_io led[2]		A15
+set_io led[3]		A16
+set_io led[4]		B12
+set_io led[5]		B14
+set_io led[6]		B15
+set_io led[7]		C14
+
+# PMODB
+set_io led1[0]    M12
+set_io led1[1]    T16
+set_io led1[2]    R10
+

@@ -1,0 +1,33 @@
+PIN_DEF = keks.pcf
+DEVICE = hx8k
+PROJ=chip_balls
+VERILOG_FILES = tmds_encoder.v \
+								my_vga_clk_generator.v \
+								ball.v \
+								hdmi_device.v \
+								lfsr.v\
+
+all: $(PROJ).rpt $(PROJ).bin
+
+# for this demo we can pretend to be an icoboard since it's also an HX8K
+# with a 100mhz clock
+%.blif: %.v
+	yosys -DICOBOARD -p 'synth_ice40 -top $(PROJ) -json $(PROJ).json -blif $@' ${VERILOG_FILES} $<
+
+%.asc: $(PIN_DEF) %.blif
+	nextpnr-ice40 -r --$(DEVICE) --package ct256  --json $(PROJ).json --asc $(PROJ).asc --pcf $(PIN_DEF)
+
+%.bin: %.asc
+	icepack $< $@
+
+%.rpt: %.asc
+	icetime -d $(DEVICE) -mtr $@ $<
+
+prog: $(PROJ).bin
+	icoprog -p < $<
+
+clean:
+	rm -f $(PROJ).blif $(PROJ).asc $(PROJ).rpt $(PROJ).bin $(PROJ).json
+
+.SECONDARY:
+.PHONY: all prog clean
